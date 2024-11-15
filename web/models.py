@@ -26,16 +26,3 @@ class Usuario(models.Model):
 # Tablas Admin
 class Administrador(Usuario):
     apellido = models.CharField(max_length=150, default="")
-
-class CategoriaProducto(models.Model):
-    nombre = models.CharField(max_length=50, default="")
-    disponible = models.BooleanField(default=True)
-
-class Producto(models.Model):
-    nombre = models.CharField(max_length=150)
-    categoria = models.ForeignKey(CategoriaProducto, on_delete=models.DO_NOTHING)
-    descripcion = models.TextField()
-    fecha_ingreso = models.DateField()
-    precio_unitario = models.FloatField()
-    disponible = models.BooleanField(default=True)
-    imagen = models.ImageField(upload_to='productos/', blank=True, null=True)  # <-- Añadir este campo

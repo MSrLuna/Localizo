@@ -11,23 +11,21 @@
 
 {% block navitems %}
     <li class="nav-item">
-        <a href="{% url 'Catalog' %}" class="nav-link text-decoration-underline">Locales Comeciales</a>
+        <a href="{% url 'Locales' %}" class="nav-link text-decoration-underline">Locales Comeciales</a>
     </li>
     <li class="nav-item">
-        <a href="{% url 'About' %}" class="nav-link text-decoration-underline">Sobre nosotros</a>
+        <a href="{% url 'Nosotros' %}" class="nav-link text-decoration-underline">Sobre nosotros</a>
     </li>
     <li class="nav-item">
-        <a href="{% url 'FAQ' %}" class="nav-link text-decoration-underline">Contacto</a>
+        <a href="{% url 'Contacto' %}" class="nav-link text-decoration-underline">Contacto</a>
     </li>
 
-    <!-- Botón favoritos -->
     <div class="ms-auto">
         <a href="{% url 'Login' %}" class="nav-link text-white" title="Favoritos">
             <i class="fas fa-heart"></i>
         </a>
     </div>
 
-    <!-- Botón de login o logout -->
     <div class="ms-auto">
         {% if request.session.user_id %}
             <a href="{% url 'LogOut' %}" title="Cerrar sesión" class="nav-link text-white">
