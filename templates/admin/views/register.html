@@ -1,0 +1,110 @@
+{% extends 'shared/baseIndex.html' %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+{% block brand %}
+<a href="{% url 'AdminHome' %}" class="navbar-brand">
+    <img class="img-fluid d-block mx-auto" style="max-height: 5rem;" src="{% static '/images/Logo.png' %}" alt="Logo">
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="card p-4 shadow" style="max-width: 32rem; width: 100%;">
+        <h1 class="card-title text-center">Registro</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-6 mt-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Juan" maxlength="150">
+                    {% if errores.name_empty %}
+                    <span class="text-danger">{{errores.name_empty}}</span>
+                    {% elif errores.name_max_char %}
+                    <span class="text-danger">{{errores.name_max_char}}</span>
+                    {% endif %}
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Peralta" maxlength="150">
+                    {% if errores.ape_empty %}
+                    <span class="text-danger">{{errores.ape_empty}}</span>
+                    {% elif errores.ape_max_char %}
+                    <span class="text-danger">{{errores.ape_max_char}}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label for="username" class="form-label">Correo</label>
+                <div class="input-group">
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    id="username" 
+                    name="username" 
+                    placeholder="peralta.javier02" 
+                    aria-label="correo" 
+                    aria-describedby="basic-addon2"
+                    maxlength="254"
+                    >
+                    <span class="input-group-text" id="basic-addon2">@nufra.com</span>
+                </div>
+                {% if errores.username_empty %}
+                <span class="text-danger">{{errores.username_empty}}</span>
+                {% elif errores.username_char_error %}
+                <span class="text-danger">{{errores.username_char_error}}</span>
+                {% endif %}
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select name="rol" id="rol" class="form-select me-2">
+                        <option value="-1">--Seleccione un Rol--</option>
+                        {% for i in roles %}
+                        {% if not i.id == 1 %}
+                        <option value="{{i.id}}">{{i.nombre}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% if errores.rol_default %}
+                    <span class="text-danger">{{errores.rol_default}}</span>
+                    {% endif%}
+                </div>
+                <div class="col-6">
+                    <label for="telefono" class="form-label">Telefono</label>
+                    <input type="number" id="telefono" name="telefono" class="form-control" placeholder="998941253" maxlength="20">
+                    {% if errores.telefono_empty %}
+                    <span class="text-danger">{{errores.telefono_empty}}</span>
+                    {% endif %}
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-6 mt-2">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-control" maxlength="128">
+                    {% if errores.password_empty %}
+                    <span class="text-danger">{{errores.password_empty}}</span>
+                    {% elif errores.password_max_char %}
+                    <span class="text-danger">{{errores.password_max_char}}</span>
+                    {% endif %}
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" maxlength="128">
+                    {% if errores.con_pass_empty %}
+                    <span class="text-danger">{{errores.con_pass_empty}}</span>
+                    {% elif errores.con_pass_max_char %}
+                    <span class="text-danger">{{errores.con_pass_max_char}}</span>
+                    {% endif %}
+                </div>
+                {% if errores.password_final %}
+                <span class="text-danger">{{errores.password_final}}</span>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-secondary w-100 mt-3">Registrar</button> 
+        </form>
+    </div>
+</div>
+<script src="{% static 'js/register/select.js' %}"></script>    
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'shared/baseIndex.html' %}
+{% load static %}
+
+{% block title %}Sobre Nosotros{% endblock %}
+
+{% block brand %}
+<a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
+    <img class="img-fluid d-block mx-auto" style="max-height: 5rem;" src="{% static 'images/Logo.png' %}" alt="Logo">
+</a>
+{% endblock %}
+
+{% block navitems %}
+    <li class="nav-item">
+        <a href="{% url 'Catalog' %}" class="nav-link text-decoration-underline">Locales Comerciales</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'About' %}" class="nav-link text-decoration-underline">Sobre Nosotros</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'FAQ' %}" class="nav-link text-decoration-underline">Contacto</a>
+    </li>
+
+    <div class="ms-auto">
+        <a href="{% url 'Login' %}" class="nav-link text-white" title="Favoritos">
+            <i class="fas fa-heart"></i>
+        </a>
+    </div>
+
+    <div class="ms-auto">
+        {% if request.session.user_id %}
+            <a href="{% url 'LogOut' %}" title="Cerrar sesión" class="nav-link text-white">
+                <i class="fas fa-right-from-bracket"></i>
+            </a>
+        {% else %}
+            <a href="{% url 'Login' %}" class="nav-link text-white" title="Iniciar sesión">
+                <i class="fas fa-user"></i>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+<section class="content-container py-5 bg-light">
+    <h1 class="text-center text-danger fw-bold mb-5" style="font-family: 'Nunito', sans-serif; font-size: 3rem;">Sobre Nosotros</h1>
+    <div class="container">
+        <!-- Historia Creativa del Equipo -->
+        <div class="col-md-10 mx-auto p-4 rounded shadow-sm" style="background: #ffffffee; font-family: 'Nunito', sans-serif; line-height: 1.7;">
+            <h2 class="text-primary mb-4" style="font-size: 2.2rem; font-weight: 700;">Un Sueño que Nació en una Conversación entre Amigos</h2>
+            <p class="text-muted" style="font-size: 1.1rem;">
+                Todo comenzó con un grupo de amigos reunidos en una cafetería local, compartiendo ideas y soñando en grande. Cada uno de ellos tenía una historia: había un experto en tecnología, una creativa con un ojo para el diseño, y un estratega apasionado por crear conexiones en su comunidad. Mientras disfrutaban de su café, surgió una idea que cambiaría sus vidas: <strong>¿y si pudiéramos ayudar a todos a encontrar los mejores lugares en la ciudad con solo unos clics?</strong>
+            </p>
+            <p class="text-muted" style="font-size: 1.1rem;">
+                Inspirados por sus propias experiencias de perderse en nuevos lugares y descubrir tesoros ocultos, estos amigos comenzaron a construir lo que hoy conocemos como Localizo. Querían que todos pudieran descubrir esos rincones que hacen de cada ciudad un lugar especial, desde restaurantes familiares hasta tiendas únicas y supermercados de barrio.
+            </p>
+            <blockquote class="blockquote px-4 my-4" style="font-style: italic; color: #555; border-left: 4px solid #0275d8;">
+                "No se trata solo de encontrar un lugar; se trata de descubrir la historia que hay detrás, de crear experiencias y de apoyar a nuestra comunidad."
+            </blockquote>
+            <p class="text-muted" style="font-size: 1.1rem;">
+                <strong>Localizo</strong> es más que una simple plataforma. Es el resultado de horas de trabajo, de noches de pizza y códigos, de reuniones y risas, y sobre todo, del compromiso de hacer algo realmente útil. Cada miembro del equipo aporta su granito de arena para que la plataforma no solo sea funcional, sino también fácil y emocionante de usar.
+            </p>
+            <h3 class="text-primary mt-4 mb-3" style="font-size: 1.8rem; font-weight: 600;">Nuestra Misión</h3>
+            <p class="text-muted" style="font-size: 1.1rem;">
+                Queremos que cada usuario de Localizo descubra lo mejor de su ciudad, sin importar si es su primera vez allí o si ha vivido toda su vida en ella. Nuestra misión es facilitar el acceso a información clara, precisa y accesible para todos. Nos emociona pensar en todas las historias que cada lugar podría contar, y estamos aquí para ser parte de tu próxima aventura.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+<style>
+    /* Contenedor principal */
+    .content-container {
+        background-color: #f8f9fa;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    /* Títulos */
+    .content-container h1 {
+        font-family: 'Nunito', sans-serif;
+        color: #d9534f;
+        font-size: 3rem;
+    }
+
+    .content-container h2 {
+        font-family: 'Nunito', sans-serif;
+        color: #0275d8;
+        font-size: 2.2rem;
+    }
+
+    /* Caja de historia */
+    .shadow-sm {
+        background-color: #ffffff;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Blockquote estilizado */
+    blockquote.blockquote {
+        font-size: 1.2rem;
+        border-left: 4px solid #0275d8;
+        padding-left: 1rem;
+        margin: 2rem 0;
+    }
+
+    /* Mejoras en el texto */
+    .content-container p {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    /* Animación de hover en enlaces */
+    .nav-link:hover {
+        color: #d9534f !important;
+        transition: color 0.3s ease;
+    }
+</style>

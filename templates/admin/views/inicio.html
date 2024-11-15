@@ -1,0 +1,52 @@
+{% extends 'shared/baseIndex.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block brand %}
+<a href="{% url 'AdminHome' %}" class="navbar-brand">
+    <img class="img-fluid d-block mx-auto" style="max-height: 5rem;" src="{% static '/images/Logo.png' %}" alt="Logo">
+</a>
+{% endblock %}
+
+{% block home %}
+<a href="{% url 'home' %}">
+    <i class="fa-solid fa-house-user fa-2x" style="color: white;"></i>
+</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Bienvenido al Panel de Administración</h1>
+    <!-- Manteniendo la estructura de cards y agregando nuevas secciones -->
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Locales Comerciales</h5>
+                    <p class="card-text">Ingresa nuevos locales comerciales a la lista para ser visto por los usuarios.</p>
+                    <a href="{% url 'AdminHome' %}" class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Tipos de Locales</h5>
+                    <p class="card-text">Ingresa nuevos tipos de locales a la lista por ejemplo: "Restaurante".</p>
+                    <a href="{% url 'AdminHome' %}" class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Ciudades</h5>
+                    <p class="card-text">Ingresa nuevas ciudades a la lista para asignarlos a locales comerciales.</p>
+                    <a href="{% url 'AdminHome' %}" class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

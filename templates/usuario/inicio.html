@@ -1,0 +1,192 @@
+{% extends 'shared/baseIndex.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block brand %}
+<a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
+    <img class="img-fluid d-block mx-auto" style="max-height: 5rem;" src="{% static '/images/Logo.png' %}" alt="Logo">
+</a>
+{% endblock %}
+
+{% block navitems %}
+    <li class="nav-item">
+        <a href="{% url 'Catalog' %}" class="nav-link text-decoration-underline">Locales Comeciales</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'About' %}" class="nav-link text-decoration-underline">Sobre nosotros</a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'FAQ' %}" class="nav-link text-decoration-underline">Contacto</a>
+    </li>
+
+    <!-- Botón favoritos -->
+    <div class="ms-auto">
+        <a href="{% url 'Login' %}" class="nav-link text-white" title="Favoritos">
+            <i class="fas fa-heart"></i>
+        </a>
+    </div>
+
+    <!-- Botón de login o logout -->
+    <div class="ms-auto">
+        {% if request.session.user_id %}
+            <a href="{% url 'LogOut' %}" title="Cerrar sesión" class="nav-link text-white">
+                <i class="fas fa-right-from-bracket"></i>
+            </a>
+        {% else %}
+            <a href="{% url 'Login' %}" class="nav-link text-white" title="Iniciar sesión">
+                <i class="fas fa-user"></i>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+
+{% block content %}
+<section class="home-container py-5 bg-light">
+    <div class="d-flex justify-content-center position-relative">
+        <!-- Imagen que toma todo el ancho de la página con el título encima -->
+        <img class="img-fluid w-100" src="{% static '/images/Banner.jpg' %}" alt="Banner de bienvenida" style="max-height: 400px; object-fit: cover;">
+        <div class="hero-text position-absolute top-50 start-50 translate-middle text-center text-white" style="z-index: 2;">
+            <h1 class="fw-bold mb-3" style="font-family: 'Nunito', sans-serif; text-shadow: 2px 2px 4px #000000;">
+                Localizo
+            </h1>
+            <p class="lead" style="font-family: 'Nunito', sans-serif; text-shadow: 1px 1px 3px #000000; font-size: 1.75rem;">
+                Donde los mejores locales comerciales están a solo un clic de distancia
+            </p>
+            <a href="{% url 'Catalog' %}" class="btn btn-danger btn-lg">Explora tus locales cercanos</a>
+        </div>
+        
+    </div>
+    <br>
+    <h2 class="text-center text-danger fw-bold mb-5" style="font-family: 'Nunito', sans-serif;">Bienvenido a Localizo: Tu Guía Local en Línea</h2>
+<div class="col mx-auto" style="max-width: 800px;">
+    <p class="text-muted ms-3" style="font-family: 'Nunito', sans-serif;">
+        Descubre todos los lugares que necesitas en un solo sitio. Localizo es tu plataforma digital para explorar y conocer los mejores locales comerciales a tu alrededor. Desde restaurantes, tiendas y supermercados hasta centros comerciales, aquí encontrarás toda la información que necesitas para hacer tu día más fácil y encontrar el lugar perfecto para cada ocasión.
+    </p>
+    <p class="text-muted ms-3" style="font-family: 'Nunito', sans-serif;">
+        Con Localizo, no solo puedes explorar una lista detallada de locales, sino también leer descripciones precisas, ver reseñas y consultar la ubicación exacta de cada sitio en Google Maps. Nuestro objetivo es brindarte una experiencia de búsqueda intuitiva y completa para que encuentres los mejores servicios y productos sin complicaciones.
+    </p>
+    
+    <h3 class="text-center text-dark fw-bold mt-5 mb-3" style="font-family: 'Nunito', sans-serif;">¿Qué puedes hacer en Localizo?</h3>
+    <ul class="text-muted ms-4" style="font-family: 'Nunito', sans-serif;">
+        <li><strong>Explorar categorías:</strong> Filtra y encuentra lugares de acuerdo a tus intereses, ya sea que busques el mejor restaurante para cenar, un supermercado cercano o un mall para pasar el día.</li>
+        <li><strong>Información detallada:</strong> Cada local cuenta con una descripción completa, horarios de atención, fotos y datos de contacto para que sepas exactamente qué esperar.</li>
+        <li><strong>Ubicación en Google Maps:</strong> Visualiza cada lugar en el mapa y obtén indicaciones para llegar fácilmente.</li>
+        <li><strong>Reseñas de usuarios:</strong> Lee opiniones y experiencias de otros usuarios para asegurarte de que elijas siempre el mejor lugar.</li>
+        <li><strong>Promociones y eventos:</strong> Mantente al día con las ofertas especiales y eventos destacados en los locales más populares de tu zona.</li>
+    </ul>
+    
+    <h3 class="text-center text-dark fw-bold mt-5 mb-3" style="font-family: 'Nunito', sans-serif;">¿Por qué elegir Localizo?</h3>
+    <p class="text-muted ms-3" style="font-family: 'Nunito', sans-serif;">
+        Localizo es más que una guía; es tu compañero en la ciudad. Te ayudamos a encontrar los lugares perfectos, planear tus salidas y descubrir sitios únicos cerca de ti. Nuestra plataforma está diseñada para que navegues de manera rápida y sencilla, con información clara y útil en cada paso.
+    </p>
+    <p class="text-muted ms-3" style="font-family: 'Nunito', sans-serif;">
+        Empieza hoy mismo a explorar tu ciudad con Localizo y descubre todo lo que tu entorno tiene para ofrecer. ¡Cada rincón tiene algo especial esperándote!
+    </p>
+</div>
+
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Carrusel con fondo oscuro -->
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carousel-image-container">
+                    <img src="{% static 'images/carousel/i1.jpg' %}" class="d-block w-100 carousel-image" alt="local1" style="max-height: 400px;">
+                    <div class="carousel-background"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-image-container">
+                    <img src="{% static 'images/carousel/i2.jpg' %}" class="d-block w-100 carousel-image" alt="local2" style="max-height: 400px;">
+                    <div class="carousel-background"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-image-container">
+                    <img src="{% static 'images/carousel/i3.jpg' %}" class="d-block w-100 carousel-image" alt="local3" style="max-height: 400px;">
+                    <div class="carousel-background"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-image-container">
+                    <img src="{% static 'images/carousel/i4.jpg' %}" class="d-block w-100 carousel-image" alt="local4" style="max-height: 400px;">
+                    <div class="carousel-background"></div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-image-container">
+                    <img src="{% static 'images/carousel/i5.jpg' %}" class="d-block w-100 carousel-image" alt="local5" style="max-height: 400px;">
+                    <div class="carousel-background"></div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+</section>
+
+
+
+<style>
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .carousel-image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-image {
+        object-fit: contain; /* Mantiene las proporciones originales de la imagen */
+        max-height: 400px;
+    }
+
+    .carousel-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: inherit;
+        background-size: cover;
+        background-position: center;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+        z-index: -1; /* Coloca el fondo debajo de la imagen */
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para los botones */
+        border: none;
+        color: white;
+        width: 5%;
+        transition: background-color 0.3s ease;
+    }
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        filter: invert(1); /* Hace los íconos blancos para una mejor visibilidad */
+    }
+
+    .carousel-control-prev:hover, .carousel-control-next:hover, 
+    .carousel-control-prev:focus, .carousel-control-next:focus, 
+    .carousel-control-prev:active, .carousel-control-next:active {
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro constante */
+    }
+</style>
+{% endblock %}
