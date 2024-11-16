@@ -61,7 +61,7 @@
                         <td class="text-center">{{ forloop.counter }}</td>
                         <td><img src="{{ local.imagen.url }}" class="img-fluid rounded" style="max-height: 100px;" /></td>
                         <td>{{ local.nombre }}</td>
-                        <td>{{ local.descripcion }}</td>
+                        <td class="text-wrap" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">{{ local.descripcion }}</td>
                         <td>{{ local.tipo_local.nombre }}</td>
                         <td>{{ local.ciudad.nombre }}</td>
                         <td class="text-center">
@@ -83,4 +83,3 @@
     </div>
 </section>
 {% endblock %}
-
