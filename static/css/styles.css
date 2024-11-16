@@ -1,218 +1,241 @@
+/* Estilo general del cuerpo de la página */
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    margin: 0;
-    padding: 0;
+    font-family: 'Montserrat', sans-serif;  /* Fuente del texto */
+    background-color: #f9f9f9;  /* Color de fondo de la página */
+    color: #333;  /* Color del texto */
+    margin: 0;  /* Elimina márgenes predeterminados del navegador */
+    padding: 0;  /* Elimina el padding predeterminado del navegador */
 }
 
+/* Estilos para la barra de navegación */
 .navbar {
-    background-color: #50C878;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #50C878;  /* Color de fondo verde claro */
+    display: flex;  /* Flexbox para alinear los elementos de la barra de navegación */
+    justify-content: space-between;  /* Distribuye los elementos a los extremos de la barra */
+    align-items: center;  /* Centra los elementos verticalmente */
+    padding: 0.5rem 1rem;  /* Espaciado interno (padding) en la barra */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Sombra suave para la barra */
 }
 
+/* Estilo del botón del menú en la barra de navegación */
 .navbar .menu-toggle {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+    background-color: transparent;  /* Fondo transparente para el botón */
+    border: none;  /* Elimina el borde del botón */
+    color: white;  /* Color del texto del botón */
+    font-size: 1.5rem;  /* Tamaño de la fuente */
+    cursor: pointer;  /* Cursor tipo puntero para indicar que es clickeable */
+    transition: transform 0.2s ease;  /* Animación suave cuando se transforma el botón */
 }
 
+/* Efecto al hacer hover sobre el botón de menú */
 .navbar .menu-toggle:hover {
-    transform: rotate(90deg);
+    transform: rotate(90deg);  /* Gira el botón 90 grados al pasar el mouse */
 }
 
+/* Estilo para la imagen del logotipo en la barra de navegación */
 .navbar-brand img {
-    max-height: 3rem;
+    max-height: 3rem;  /* Limita la altura de la imagen del logo */
 }
 
+/* Estilos para la barra lateral */
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: -250px;  /* Comienza fuera de la pantalla, a la derecha */
-    width: 250px;
-    height: auto;
-    max-height: 70%; /* No ocupa toda la pantalla */
-    background-color: #333;
-    color: white;
-    transition: right 0.3s ease-in-out;  /* Animación para entrar y salir */
-    z-index: 1000;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px 0 0 10px;  /* Redondea las esquinas del menú */
-    overflow-y: auto; /* Permite scroll si el contenido excede el alto del menú */
+    position: fixed;  /* Posiciona la barra lateral de manera fija en la pantalla */
+    top: 0;  /* Se posiciona en la parte superior de la pantalla */
+    right: -250px;  /* Empuja la barra lateral fuera de la pantalla inicialmente */
+    width: 250px;  /* Ancho de la barra lateral */
+    height: auto;  /* La altura será ajustada según el contenido */
+    max-height: 70%;  /* La barra lateral no ocupará más del 70% de la pantalla */
+    background-color: #333;  /* Fondo oscuro para la barra lateral */
+    color: white;  /* Color blanco para el texto */
+    transition: right 0.3s ease-in-out;  /* Transición suave para el deslizamiento */
+    z-index: 1000;  /* Asegura que la barra lateral esté encima de otros elementos */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);  /* Sombra para darle profundidad */
+    border-radius: 10px 0 0 10px;  /* Esquinas redondeadas en la parte superior izquierda e inferior derecha */
+    overflow-y: auto;  /* Permite el desplazamiento vertical si el contenido excede el alto */
 }
 
+/* Cuando la clase 'active' se agrega a la barra lateral, se desliza hacia la derecha */
 .sidebar.active {
-    right: 0;  /* Cuando se activa, el menú se desliza a la derecha */
+    right: 0;  /* Mueve la barra lateral hacia la posición original */
 }
 
+/* Estilos para la lista dentro de la barra lateral */
 .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
+    list-style: none;  /* Elimina los puntos de lista */
+    padding: 0;  /* Elimina el padding por defecto */
+    margin: 2rem 0;  /* Margen en la parte superior e inferior */
 }
 
+/* Estilos para cada elemento de la lista dentro de la barra lateral */
 .sidebar ul li {
-    margin: 1rem 0;
+    margin: 1rem 0;  /* Espacio entre los elementos de la lista */
 }
 
+/* Estilos para los enlaces dentro de la barra lateral */
 .sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 0.8rem 1rem;
-    display: block;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    color: white;  /* Color de los enlaces */
+    text-decoration: none;  /* Elimina el subrayado de los enlaces */
+    padding: 0.8rem 1rem;  /* Espaciado interno para los enlaces */
+    display: block;  /* Hace que el enlace ocupe todo el espacio disponible en el contenedor */
+    border-radius: 5px;  /* Esquinas redondeadas para los enlaces */
+    transition: background-color 0.3s;  /* Transición suave para el cambio de color */
 }
 
+/* Efecto al hacer hover sobre los enlaces */
 .sidebar ul li a:hover {
-    background-color: #50C878;
-    color: white;
+    background-color: #50C878;  /* Fondo verde claro cuando se pasa el mouse sobre el enlace */
+    color: white;  /* Asegura que el texto siga siendo blanco */
 }
 
+/* Estilos para la capa de superposición (overlay) cuando el menú está activo */
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 500;
-    display: none;
-    transition: opacity 0.3s;
+    position: fixed;  /* Fija la capa en la pantalla */
+    top: 0;  /* Se coloca en la parte superior */
+    left: 0;  /* Se coloca a la izquierda */
+    width: 100%;  /* Ocupa todo el ancho de la pantalla */
+    height: 100%;  /* Ocupa toda la altura de la pantalla */
+    background: rgba(0, 0, 0, 0.5);  /* Fondo oscuro con opacidad */
+    z-index: 500;  /* Asegura que la capa esté por encima de la página */
+    display: none;  /* Inicialmente oculta */
+    transition: opacity 0.3s;  /* Transición suave para el cambio de opacidad */
 }
 
+/* Cuando la clase 'active' se agrega a la superposición, se hace visible */
 .overlay.active {
-    display: block;
-    opacity: 1;
+    display: block;  /* Muestra la capa */
+    opacity: 1;  /* Establece la opacidad a 1 */
 }
 
+/* Estilos generales para el contenido principal */
 .content {
-    margin: 2rem;
+    margin: 2rem;  /* Margen en torno al contenido */
 }
 
+/* Estilos para el contenedor interno del carrusel */
 .carousel-inner {
-    position: relative;
-    overflow: hidden;
+    position: relative;  /* Posición relativa para el contenedor */
+    overflow: hidden;  /* Esconde el contenido que se desborda */
 }
 
+/* Estilos para las imágenes dentro del carrusel */
 .carousel-image-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;  /* Posición relativa */
+    display: flex;  /* Flexbox para alinear las imágenes */
+    justify-content: center;  /* Centra las imágenes horizontalmente */
+    align-items: center;  /* Centra las imágenes verticalmente */
 }
 
 .carousel-image {
-    object-fit: contain;
-    max-height: 400px;
+    object-fit: contain;  /* Mantiene las proporciones de las imágenes */
+    max-height: 400px;  /* Limita la altura máxima de las imágenes */
 }
 
+/* Fondo oscuro que se coloca detrás de las imágenes del carrusel */
 .carousel-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: inherit;
-    background-size: cover;
-    background-position: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    position: absolute;  /* Posición absoluta para cubrir el área completa */
+    top: 0;  /* Se coloca en la parte superior */
+    left: 0;  /* Se coloca a la izquierda */
+    width: 100%;  /* Ocupa todo el ancho */
+    height: 100%;  /* Ocupa toda la altura */
+    background-image: inherit;  /* Hereda la imagen de fondo */
+    background-size: cover;  /* Cubre todo el espacio */
+    background-position: center;  /* Centra la imagen de fondo */
+    background-color: rgba(0, 0, 0, 0.5);  /* Fondo oscuro con opacidad */
+    z-index: -1;  /* Coloca el fondo detrás de la imagen */
 }
 
+/* Estilos para los botones del carrusel */
 .carousel-control-prev, .carousel-control-next {
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    width: 5%;
-    transition: background-color 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.5);  /* Fondo oscuro para los botones */
+    border: none;  /* Elimina los bordes de los botones */
+    color: white;  /* Color de los íconos de los botones */
+    width: 5%;  /* Establece el tamaño de los botones */
+    transition: background-color 0.3s ease;  /* Transición suave para el fondo */
 }
 
+/* Hace que los íconos del carrusel sean blancos */
 .carousel-control-prev-icon, .carousel-control-next-icon {
-    filter: invert(1);
+    filter: invert(1);  /* Invierte los colores para que sean blancos */
 }
 
+/* Efecto al hacer hover sobre los botones del carrusel */
 .carousel-control-prev:hover, .carousel-control-next:hover, 
 .carousel-control-prev:focus, .carousel-control-next:focus, 
 .carousel-control-prev:active, .carousel-control-next:active {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);  /* Mantiene el fondo oscuro al hacer hover */
 }
 
+/* Limita el texto en las celdas de la tabla */
 .table td {
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 150px;  /* Limita el ancho máximo de la celda */
+    overflow: hidden;  /* Oculta el texto que se desborda */
+    text-overflow: ellipsis;  /* Muestra '...' cuando el texto es muy largo */
+    white-space: nowrap;  /* Evita que el texto se divida en varias líneas */
 }
 
+/* Estilo para truncar el texto en elementos */
 .truncate-text {
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 150px;  /* Limita el ancho máximo del texto */
+    overflow: hidden;  /* Oculta el texto que se desborda */
+    text-overflow: ellipsis;  /* Muestra '...' cuando el texto es demasiado largo */
+    white-space: nowrap;  /* Evita que el texto se divida en varias líneas */
 }
 
-/* Responsividad para pantallas pequeñas */
+/* Responsividad para pantallas pequeñas (menos de 768px) */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        padding: 1rem;
+        flex-direction: column;  /* Cambia la barra de navegación a columna */
+        padding: 1rem;  /* Aumenta el padding en pantallas pequeñas */
     }
 
     .navbar .menu-toggle {
-        font-size: 1.2rem;
+        font-size: 1.2rem;  /* Reduce el tamaño del botón */
     }
 
     .sidebar {
-        width: 200px;
-        max-height: 60%; /* Ajustar la altura del menú en pantallas pequeñas */
+        width: 200px;  /* Reduce el ancho de la barra lateral */
+        max-height: 60%;  /* Ajusta la altura de la barra lateral */
     }
 
     .sidebar ul {
-        margin-top: 1rem;
+        margin-top: 1rem;  /* Aumenta el margen superior de los elementos de la lista */
     }
 
     .overlay.active {
-        display: block;
-        opacity: 0.8;
+        display: block;  /* Muestra la capa de superposición */
+        opacity: 0.8;  /* Opacidad de la capa de superposición */
     }
 
     .content {
-        margin: 1rem;
+        margin: 1rem;  /* Reduce el margen del contenido */
     }
 
     .carousel-image {
-        max-height: 300px;
+        max-height: 300px;  /* Ajusta la altura máxima de las imágenes */
     }
 }
 
-/* Responsividad adicional para dispositivos muy pequeños */
+/* Responsividad adicional para dispositivos muy pequeños (menos de 480px) */
 @media (max-width: 480px) {
     .navbar {
-        padding: 0.5rem;
+        padding: 0.5rem;  /* Reduce el padding de la barra de navegación */
     }
 
     .sidebar {
-        width: 100%;
-        max-height: 50%; /* Menú más pequeño */
+        width: 100%;  /* La barra lateral ocupa todo el ancho de la pantalla */
+        max-height: 50%;  /* Ajusta la altura de la barra lateral */
     }
 
     .sidebar ul {
-        margin: 1rem 0;
+        margin: 1rem 0;  /* Ajusta el margen de los elementos de la lista */
     }
 
     .content {
-        margin: 0.5rem;
+        margin: 0.5rem;  /* Reduce aún más el margen del contenido */
     }
 
     .carousel-image {
-        max-height: 250px;
+        max-height: 250px;  /* Ajusta la altura máxima de las imágenes */
     }
 }
+

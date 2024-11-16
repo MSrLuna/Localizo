@@ -1,0 +1,128 @@
+{% extends 'shared/baseIndex.html' %}
+{% load static %}
+
+{% block title %}Gestión de Usuarios{% endblock %}
+
+{% block brand %}
+<a href="{% url 'AdminHome' %}" class="navbar-brand">
+    <img class="img-fluid d-block mx-auto" style="max-height: 5rem;" src="{% static '/images/Logo.png' %}" alt="Logo">
+</a>
+{% endblock %}
+
+{% block home %}
+    <li>
+        <a href="{% url 'home' %}">
+            <i class="fas fa-home"></i> Home Usuario
+        </a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Gestión de Usuarios</h1>
+    
+    <!-- Selector para elegir la tabla -->
+    <div class="text-center mb-4">
+        <label for="userSelector" class="form-label">Selecciona el tipo de usuario:</label>
+        <select id="userSelector" class="form-select w-50" onchange="toggleTable()">
+            <option value="usuarios_generales">Usuarios Generales</option>
+            <option value="administradores">Administradores</option>
+        </select>
+    </div>
+
+    <div class="row mt-5">
+        <!-- Columna para la tabla -->
+        <div class="col-md-8 mb-4">
+            <!-- Tabla de Usuarios Generales -->
+            <div id="usuariosGeneralesTable" class="card text-center shadow" style="display: block;">
+                <div class="card-body">
+                    <h5 class="card-title">Usuarios Generales</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>RUT</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for usuario in usuarios_generales %}
+                                <tr>
+                                    <td>{{ usuario.rut }}</td>
+                                    <td>{{ usuario.nombre }}</td>
+                                    <td>{{ usuario.email }}</td>
+                                    <td>
+                                        <a href="{% url 'EliminarUsuario' usuario.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tabla de Administradores -->
+            <div id="administradoresTable" class="card text-center shadow" style="display: none;">
+                <div class="card-body">
+                    <h5 class="card-title">Administradores</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>RUT</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for admin in administradores %}
+                                <tr>
+                                    <td>{{ admin.rut }}</td>
+                                    <td>{{ admin.nombre }}</td>
+                                    <td>{{ admin.email }}</td>
+                                    <td>
+                                        <a href="{% url 'EliminarUsuario' admin.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna para el formulario -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Agregar Administrador</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Agregar Administrador</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Función para alternar la visibilidad de las tablas según la opción seleccionada
+    function toggleTable() {
+        var userSelector = document.getElementById("userSelector").value;
+        
+        if (userSelector === "usuarios_generales") {
+            document.getElementById("usuariosGeneralesTable").style.display = "block";
+            document.getElementById("administradoresTable").style.display = "none";
+        } else if (userSelector === "administradores") {
+            document.getElementById("usuariosGeneralesTable").style.display = "none";
+            document.getElementById("administradoresTable").style.display = "block";
+        }
+    }
+
+    // Ejecutar la función de inmediato para mostrar la tabla correcta por defecto
+    window.onload = toggleTable;
+</script>
+{% endblock %}

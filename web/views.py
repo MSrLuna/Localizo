@@ -184,3 +184,36 @@ def eliminar_local(request, local_id):
 def ver_local(request, id):
     local = get_object_or_404(LocalComercial, id=id)
     return render(request, 'verLocal.html', {'local': local})
+
+@admin_required
+def gestion_usuarios(request):
+    usuarios_generales = Usuario.objects.filter(rol__nombre='Usuario General')
+    administradores = Usuario.objects.filter(rol__nombre='Administrador')
+    form = AddUserForm()
+
+    if request.method == 'POST':
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.estado = 'n/a'
+            user.rol = Roles.objects.get(nombre='Administrador')
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            messages.success(request, 'Administrador agregado exitosamente.')
+            return redirect('GestionUsuarios')
+
+    return render(request, 'admin/job/usuarios.html', {
+        'usuarios_generales': usuarios_generales,
+        'administradores': administradores,
+        'form': form
+    })
+
+@admin_required
+def eliminar_usuario(request, usuario_id):
+    try:
+        usuario = Usuario.objects.get(id=usuario_id)
+        usuario.delete()
+        messages.success(request, f'El usuario "{usuario.nombre}" ha sido eliminado exitosamente.')
+    except Usuario.DoesNotExist:
+        messages.error(request, 'El usuario no existe.')
+    return redirect('GestionUsuarios')

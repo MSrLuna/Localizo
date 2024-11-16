@@ -27,5 +27,8 @@ urlpatterns = [
     path('home/administrador/tipos-locales/eliminar/<int:tipo_id>/', v.eliminar_tipoLocal, name='EliminarTipoLocal'),
     path('gestion/locales/', v.gestion_locales_comerciales, name='GestionLocalesComerciales'),
     path('home/administrador/locales/eliminar/<int:local_id>/', v.eliminar_local, name='EliminarLocal'),
+    path('home/administrador/usuarios/', v.gestion_usuarios, name='GestionUsuarios'),
+    path('home/administrador/usuarios/eliminar/<int:usuario_id>/', v.eliminar_usuario, name='EliminarUsuario'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
