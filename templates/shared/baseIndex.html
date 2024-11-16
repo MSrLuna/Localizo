@@ -29,11 +29,9 @@
             {% if request.session.rol_id == '2' %}
             <li>
                 <a href="{% url 'AdminHome' %}">
-                    <i class="fas fa-home"></i> Inicio
+                    <i class="fas fa-home"></i> Panel Admin
                 </a>
             </li>
-            {% elif request.session.rol_id == '3' %}
-            <!-- Otros enlaces -->
             {% endif %}
             {% endblock %}
             {% block navitems %}

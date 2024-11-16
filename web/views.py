@@ -1,7 +1,6 @@
 import datetime
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.mail import send_mail
@@ -86,12 +85,6 @@ def RenderContacto(request):
 @admin_required
 def RenderAdminHome(request):
     return render(request, 'admin/views/inicio.html')
-
-@admin_required
-def RenderTrabajadores(request):
-    users = Usuario.objects.all()
-    adm = Administrador.objects.all()
-    return render(request, 'admin/views/trabajadores.html', {'users': users, 'adm': adm})
 
 def contact_view(request):
     if request.method == 'POST':
