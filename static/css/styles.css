@@ -1,0 +1,149 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #50C878;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.navbar .menu-toggle {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.navbar .menu-toggle:hover {
+    transform: rotate(90deg);
+}
+.navbar-brand img {
+    max-height: 3rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+.sidebar.active {
+    left: 0;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+.sidebar ul li {
+    margin: 1rem 0;
+}
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.sidebar ul li a:hover {
+    background-color: #50C878;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 500;
+    display: none;
+    transition: opacity 0.3s;
+}
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.content {
+    margin: 2rem;
+}
+
+.carousel-inner {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-image {
+    object-fit: contain; /* Mantiene las proporciones originales de la imagen */
+    max-height: 400px;
+}
+
+.carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    z-index: -1; /* Coloca el fondo debajo de la imagen */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para los botones */
+    border: none;
+    color: white;
+    width: 5%;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(1); /* Hace los íconos blancos para una mejor visibilidad */
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover, 
+.carousel-control-prev:focus, .carousel-control-next:focus, 
+.carousel-control-prev:active, .carousel-control-next:active {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro constante */
+}
+
+/* Limita la longitud del texto en las celdas de la tabla */
+.table td {
+    max-width: 150px;  /* Limita el ancho de la celda */
+    overflow: hidden;  /* Oculta el texto que se sale de la celda */
+    text-overflow: ellipsis;  /* Muestra '...' cuando el texto es muy largo */
+    white-space: nowrap;  /* Evita que el texto se envuelva a la siguiente línea */
+}
+
+/* Estilo para las celdas con texto largo */
+.truncate-text {
+    max-width: 150px;  /* Limita el ancho de la celda */
+    overflow: hidden;  /* Oculta el texto que se sale de la celda */
+    text-overflow: ellipsis;  /* Muestra '...' cuando el texto es muy largo */
+    white-space: nowrap;  /* Evita que el texto se envuelva a la siguiente línea */
+}

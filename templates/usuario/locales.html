@@ -10,43 +10,43 @@
 {% endblock %}
 
 {% block navitems %}
-    <li class="nav-item">
-        <a href="{% url 'Locales' %}" class="nav-link text-decoration-underline">Locales Comerciales</a>
-    </li>
-    <li class="nav-item">
-        <a href="{% url 'Nosotros' %}" class="nav-link text-decoration-underline">Sobre nosotros</a>
-    </li>
-    <li class="nav-item">
-        <a href="{% url 'Contacto' %}" class="nav-link text-decoration-underline">Contacto</a>
-    </li>
+<li class="nav-item">
+    <a href="{% url 'Locales' %}" class="nav-link text-decoration-underline">Locales Comerciales</a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'Nosotros' %}" class="nav-link text-decoration-underline">Sobre nosotros</a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'Contacto' %}" class="nav-link text-decoration-underline">Contacto</a>
+</li>
 
-    <div class="ms-auto">
-        <a href="{% url 'Login' %}" class="nav-link text-white" title="Favoritos">
-            <i class="fas fa-heart"></i>
+<div class="ms-auto">
+    <a href="{% url 'Login' %}" class="nav-link text-white" title="Favoritos">
+        <i class="fas fa-heart"></i>
+    </a>
+</div>
+
+<div class="ms-auto">
+    {% if request.session.user_id %}
+        <a href="{% url 'LogOut' %}" title="Cerrar sesión" class="nav-link text-white">
+            <i class="fas fa-right-from-bracket"></i>
         </a>
-    </div>
-
-    <div class="ms-auto">
-        {% if request.session.user_id %}
-            <a href="{% url 'LogOut' %}" title="Cerrar sesión" class="nav-link text-white">
-                <i class="fas fa-right-from-bracket"></i>
-            </a>
-        {% else %}
-            <a href="{% url 'Login' %}" class="nav-link text-white" title="Iniciar sesión">
-                <i class="fas fa-user"></i>
-            </a>
-        {% endif %}
-    </div>
+    {% else %}
+        <a href="{% url 'Login' %}" class="nav-link text-white" title="Iniciar sesión">
+            <i class="fas fa-user"></i>
+        </a>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block content %}
 <section class="catalog-container py-5 bg-light">
-    <h1 class="text-center text-danger fw-bold mb-5" style="font-family: 'Nunito', cursive, sans-serif; font-size: 3rem;">Locales</h1>
+    <h1 class="text-center text-danger fw-bold mb-5" style="font-family: 'Nunito', cursive, sans-serif; font-size: 3rem;">Locales Comerciales</h1>
     <div class="container">
         <div class="row">
-            <!-- Empezamos con la tabla de locales comerciales -->
-            <table class="table table-bordered">
-                <thead>
+            <!-- Tabla de locales comerciales -->
+            <table class="table table-hover table-striped table-responsive">
+                <thead class="table-dark text-center">
                     <tr>
                         <th>#</th>
                         <th>Imagen</th>
@@ -54,29 +54,29 @@
                         <th>Descripción</th>
                         <th>Tipo de Local</th>
                         <th>Ciudad</th>
-                        <th>Link</th>  <!-- Nueva columna para mostrar el link -->
+                        <th>Link</th> <!-- Nueva columna -->
                     </tr>
                 </thead>
                 <tbody>
                     {% for local in locales %}
                     <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td><img src="{{ local.imagen.url }}" style="max-height: 100px;" /></td>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td><img src="{{ local.imagen.url }}" class="img-fluid rounded" style="max-height: 100px;" /></td>
                         <td>{{ local.nombre }}</td>
                         <td>{{ local.descripcion }}</td>
                         <td>{{ local.tipo_local.nombre }}</td>
                         <td>{{ local.ciudad.nombre }}</td>
-                        <td>
+                        <td class="text-center">
                             {% if local.link %}
-                                <a href="{{ local.link }}" target="_blank">{{ local.link }}</a>  <!-- Mostrar el link -->
+                                <a href="{{ local.link }}" target="_blank" class="btn btn-primary btn-sm">Ver en Google Maps</a>
                             {% else %}
-                                No disponible
+                                <span class="badge bg-secondary">No disponible</span>
                             {% endif %}
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="7" class="text-center">No hay locales comerciales registrados.</td>
+                        <td colspan="7" class="text-center text-muted">No hay locales comerciales registrados.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -86,68 +86,3 @@
 </section>
 {% endblock %}
 
-<style>
-    /* Mejora la apariencia de las tarjetas */
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-body {
-        padding: 1rem;
-    }
-
-    .card-footer {
-        background-color: #f9f9f9;
-        border-top: 1px solid #ff9999;
-        border-radius: 0 0 15px 15px;
-        padding: 0.5rem 0;
-    }
-
-    .catalog-container {
-        background-color: #f8f9fa;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-
-    .catalog-container h1 {
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        font-size: 3rem;
-        color: #ff4d4d;
-    }
-
-    .catalog-container h2 {
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-        font-size: 2rem;
-        color: #333;
-    }
-
-    /* Estilo para el precio */
-    .card-text.text-success {
-        font-weight: bold;
-        color: #28a745;
-        font-size: 1.2rem;
-    }
-
-    /* Estilo para el formulario de añadir al carrito */
-    .form-control {
-        border-radius: 5px;
-        padding: 0.5rem;
-    }
-
-    .btn-warning {
-        background-color: #ffcc00;
-        border: none;
-        color: #fff;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-
-    .btn-warning:hover {
-        background-color: #e6b800;
-    }
-</style>

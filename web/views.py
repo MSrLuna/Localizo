@@ -54,38 +54,6 @@ def RenderLogin(request):
         return render(request, 'shared/login.html', {'errores': has_error})
     return render(request, 'shared/login.html')
 
-@admin_required
-def RenderRegister(request):
-    roles = Roles.objects.all()
-    if request.method == "POST":
-        has_error = {}
-        nombre = request.POST.get('nombre')
-        apellido = request.POST.get('apellido')
-        username = request.POST.get('username')
-        rol = request.POST.get('rol')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
-        telefono = request.POST.get('telefono')
-
-        if password != confirm_password:
-            has_error['password_final'] = 'Las contraseñas no coinciden'
-
-        if not has_error:
-            if rol == '2':
-                user = Administrador(
-                    nombre=nombre.title(),
-                    apellido=apellido.title(),
-                    rol=Roles.objects.get(id=rol),
-                    email=username,
-                    estado='Activo',
-                    telefono=telefono
-                )
-                user.set_password(password)
-                user.save()
-            return render(request, 'admin/views/register.html', {'roles': roles})
-        return render(request, 'admin/views/register.html', {'roles': roles, 'errores': has_error})
-    return render(request, 'admin/views/register.html', {'roles': roles})
-
 # Usuario General
 def register_view(request):
     if request.method == 'POST':
@@ -105,7 +73,8 @@ def RenderInicio(request):
     return render(request, 'usuario/inicio.html')
 
 def RenderLocales(request):
-    return render(request, 'usuario/locales.html')
+    locales = LocalComercial.objects.all()  # Recupera todos los locales comerciales
+    return render(request, 'usuario/locales.html', {'locales': locales})
 
 def RenderNosotros(request):
     return render(request, 'usuario/nosotros.html')
@@ -208,6 +177,16 @@ def gestion_locales_comerciales(request):
         'tipos_local': tipos_local,
         'ciudades': ciudades
     })
+
+@admin_required
+def eliminar_local(request, local_id):
+    try:
+        local = get_object_or_404(LocalComercial, id=local_id)
+        local.delete()
+        messages.success(request, f'El local comercial "{local.nombre}" ha sido eliminado exitosamente.')
+    except LocalComercial.DoesNotExist:
+        messages.error(request, 'El local comercial no existe.')
+    return redirect('GestionLocalesComerciales')
 
 def ver_local(request, id):
     local = get_object_or_404(LocalComercial, id=id)

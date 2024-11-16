@@ -10,24 +10,6 @@
 {% endblock %}
 
 {% block content %}
-<style>
-    /* Limita la longitud del texto en las celdas de la tabla */
-    .table td {
-        max-width: 150px;  /* Limita el ancho de la celda */
-        overflow: hidden;  /* Oculta el texto que se sale de la celda */
-        text-overflow: ellipsis;  /* Muestra '...' cuando el texto es muy largo */
-        white-space: nowrap;  /* Evita que el texto se envuelva a la siguiente línea */
-    }
-
-    /* Estilo para las celdas con texto largo */
-    .truncate-text {
-        max-width: 150px;  /* Limita el ancho de la celda */
-        overflow: hidden;  /* Oculta el texto que se sale de la celda */
-        text-overflow: ellipsis;  /* Muestra '...' cuando el texto es muy largo */
-        white-space: nowrap;  /* Evita que el texto se envuelva a la siguiente línea */
-    }
-</style>
-
 <div class="container mt-4">
     <h1 class="text-center">Locales Comerciales</h1>
 
@@ -43,7 +25,8 @@
                         <th>Descripción</th>
                         <th>Tipo de Local</th>
                         <th>Ciudad</th>
-                        <th>Link</th>  <!-- Nueva columna para mostrar el link -->
+                        <th>Link</th>
+                        <th>Acciones</th>  <!-- Columna para las acciones -->
                     </tr>
                 </thead>
                 <tbody>
@@ -57,15 +40,22 @@
                         <td>{{ local.ciudad.nombre }}</td>
                         <td>
                             {% if local.link %}
-                                <a href="{{ local.link }}" target="_blank">{{ local.link }}</a>  <!-- Mostrar el link -->
+                                <a href="{{ local.link }}" target="_blank">{{ local.link }}</a>
                             {% else %}
                                 No disponible
                             {% endif %}
                         </td>
+                        <td>
+                            <!-- Formulario para eliminar el local -->
+                            <form method="POST" action="{% url 'EliminarLocal' local.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar este local?')">Eliminar</button>
+                            </form>
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="7" class="text-center">No hay locales comerciales registrados.</td>
+                        <td colspan="8" class="text-center">No hay locales comerciales registrados.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -76,11 +66,10 @@
             <h3 class="mb-3">Agregar Nuevo Local Comercial</h3>
             <form method="post" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
-                {{ form.as_p }}  <!-- Renderiza el formulario con los campos de nombre, descripción, tipo de local, ciudad, imagen y link -->
+                {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Agregar</button>
             </form>
         </div>
     </div>
 </div>
 {% endblock %}
-
