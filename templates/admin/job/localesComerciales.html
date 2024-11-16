@@ -1,0 +1,86 @@
+{% extends 'shared/baseIndex.html' %}
+{% load static %}
+
+{% block title %}Locales Comerciales{% endblock %}
+
+{% block brand %}
+<a href="{% url 'AdminHome' %}" class="navbar-brand">
+    <img class="img-fluid d-block mx-auto" style="max-height: 5rem;" src="{% static '/images/Logo.png' %}" alt="Logo">
+</a>
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Limita la longitud del texto en las celdas de la tabla */
+    .table td {
+        max-width: 150px;  /* Limita el ancho de la celda */
+        overflow: hidden;  /* Oculta el texto que se sale de la celda */
+        text-overflow: ellipsis;  /* Muestra '...' cuando el texto es muy largo */
+        white-space: nowrap;  /* Evita que el texto se envuelva a la siguiente línea */
+    }
+
+    /* Estilo para las celdas con texto largo */
+    .truncate-text {
+        max-width: 150px;  /* Limita el ancho de la celda */
+        overflow: hidden;  /* Oculta el texto que se sale de la celda */
+        text-overflow: ellipsis;  /* Muestra '...' cuando el texto es muy largo */
+        white-space: nowrap;  /* Evita que el texto se envuelva a la siguiente línea */
+    }
+</style>
+
+<div class="container mt-4">
+    <h1 class="text-center">Locales Comerciales</h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 mb-4">
+            <h3 class="mb-3">Locales Comerciales Existentes</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Tipo de Local</th>
+                        <th>Ciudad</th>
+                        <th>Link</th>  <!-- Nueva columna para mostrar el link -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for local in locales %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><img src="{{ local.imagen.url }}" style="max-height: 100px;" /></td>
+                        <td>{{ local.nombre }}</td>
+                        <td>{{ local.descripcion }}</td>
+                        <td>{{ local.tipo_local.nombre }}</td>
+                        <td>{{ local.ciudad.nombre }}</td>
+                        <td>
+                            {% if local.link %}
+                                <a href="{{ local.link }}" target="_blank">{{ local.link }}</a>  <!-- Mostrar el link -->
+                            {% else %}
+                                No disponible
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">No hay locales comerciales registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <h3 class="mb-3">Agregar Nuevo Local Comercial</h3>
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}  <!-- Renderiza el formulario con los campos de nombre, descripción, tipo de local, ciudad, imagen y link -->
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

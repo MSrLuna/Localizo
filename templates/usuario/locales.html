@@ -11,7 +11,7 @@
 
 {% block navitems %}
     <li class="nav-item">
-        <a href="{% url 'Locales' %}" class="nav-link text-decoration-underline">Locales Comeciales</a>
+        <a href="{% url 'Locales' %}" class="nav-link text-decoration-underline">Locales Comerciales</a>
     </li>
     <li class="nav-item">
         <a href="{% url 'Nosotros' %}" class="nav-link text-decoration-underline">Sobre nosotros</a>
@@ -43,7 +43,45 @@
 <section class="catalog-container py-5 bg-light">
     <h1 class="text-center text-danger fw-bold mb-5" style="font-family: 'Nunito', cursive, sans-serif; font-size: 3rem;">Locales</h1>
     <div class="container">
-        
+        <div class="row">
+            <!-- Empezamos con la tabla de locales comerciales -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Tipo de Local</th>
+                        <th>Ciudad</th>
+                        <th>Link</th>  <!-- Nueva columna para mostrar el link -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for local in locales %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><img src="{{ local.imagen.url }}" style="max-height: 100px;" /></td>
+                        <td>{{ local.nombre }}</td>
+                        <td>{{ local.descripcion }}</td>
+                        <td>{{ local.tipo_local.nombre }}</td>
+                        <td>{{ local.ciudad.nombre }}</td>
+                        <td>
+                            {% if local.link %}
+                                <a href="{{ local.link }}" target="_blank">{{ local.link }}</a>  <!-- Mostrar el link -->
+                            {% else %}
+                                No disponible
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">No hay locales comerciales registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>
 {% endblock %}

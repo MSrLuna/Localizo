@@ -26,3 +26,26 @@ class Usuario(models.Model):
 # Tablas Admin
 class Administrador(Usuario):
     apellido = models.CharField(max_length=150, default="")
+
+class Ciudad(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+
+class TipoLocal(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+    
+class LocalComercial(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    imagen = models.ImageField(upload_to='locales_comerciales/')
+    tipo_local = models.ForeignKey(TipoLocal, on_delete=models.CASCADE)
+    ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+    link = models.URLField(max_length=200, blank=True, null=True)  # Campo para almacenar el link
+
+    def __str__(self):
+        return self.nombre

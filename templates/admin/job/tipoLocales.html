@@ -1,0 +1,60 @@
+{% extends 'shared/baseIndex.html' %}
+{% load static %}
+
+{% block title %}Gestión de Tipos de Locales{% endblock %}
+
+{% block brand %}
+<a href="{% url 'AdminHome' %}" class="navbar-brand">
+    <img class="img-fluid d-block mx-auto" style="max-height: 5rem;" src="{% static '/images/Logo.png' %}" alt="Logo">
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Gestión de Tipos de Locales</h1>
+    <div class="row mt-4">
+        <!-- Tabla de ciudades -->
+        <div class="col-md-8">
+            <h3 class="mb-3">Tipos de Locales</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tipoLocal in tipoLocales %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ tipoLocal.nombre }}</td>
+                    <td>
+                        <form method="post" action="{% url 'EliminarTipoLocal' tipoLocal.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este tipo de local?');">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center">No hay tipos de locales registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulario para agregar un nuevo tipo de local -->
+    <div class="col-md-4">
+        <h3 class="mb-3">Agregar Tipo de Local</h3>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Renderiza el formulario -->
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
